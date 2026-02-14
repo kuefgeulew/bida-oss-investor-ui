@@ -1,0 +1,365 @@
+{
+  "applicationSteps": [
+    {
+      "id": "profile_creation",
+      "name": "Investor Profile Creation",
+      "order": 1,
+      "triggers": ["application_submission"],
+      "nextSteps": ["application_submission"],
+      "requiredDocuments": [],
+      "estimatedDays": 1,
+      "responsibleParty": "investor"
+    },
+    {
+      "id": "application_submission",
+      "name": "Investment Application Submission",
+      "order": 2,
+      "triggers": ["bida_initial_review"],
+      "nextSteps": ["bida_initial_review"],
+      "requiredDocuments": [
+        "business_plan",
+        "incorporation_docs",
+        "passport_copy",
+        "financial_statements"
+      ],
+      "estimatedDays": 1,
+      "responsibleParty": "investor"
+    },
+    {
+      "id": "bida_initial_review",
+      "name": "BIDA Initial Review",
+      "order": 3,
+      "triggers": ["document_verification", "sector_classification"],
+      "nextSteps": ["document_verification", "payment_processing"],
+      "requiredDocuments": [],
+      "estimatedDays": 3,
+      "responsibleParty": "bida_officer"
+    },
+    {
+      "id": "payment_processing",
+      "name": "Government Fee Payment",
+      "order": 4,
+      "triggers": ["rjsc_submission"],
+      "nextSteps": ["rjsc_submission"],
+      "requiredDocuments": ["payment_receipt"],
+      "estimatedDays": 1,
+      "responsibleParty": "investor"
+    },
+    {
+      "id": "rjsc_submission",
+      "name": "RJSC Company Registration",
+      "order": 5,
+      "triggers": ["rjsc_approval", "tin_application"],
+      "nextSteps": ["rjsc_approval", "tin_application"],
+      "requiredDocuments": [
+        "memorandum_of_association",
+        "articles_of_association",
+        "directors_list"
+      ],
+      "estimatedDays": 7,
+      "responsibleParty": "rjsc"
+    },
+    {
+      "id": "rjsc_approval",
+      "name": "RJSC Certificate Issuance",
+      "order": 6,
+      "triggers": ["bangladesh_bank_submission"],
+      "nextSteps": ["bangladesh_bank_submission"],
+      "requiredDocuments": [],
+      "estimatedDays": 3,
+      "responsibleParty": "rjsc"
+    },
+    {
+      "id": "tin_application",
+      "name": "NBR TIN Application",
+      "order": 7,
+      "triggers": ["tin_approval"],
+      "nextSteps": ["tin_approval"],
+      "requiredDocuments": ["rjsc_certificate"],
+      "estimatedDays": 5,
+      "responsibleParty": "nbr"
+    },
+    {
+      "id": "tin_approval",
+      "name": "TIN Certificate Issuance",
+      "order": 8,
+      "triggers": ["trade_license_application"],
+      "nextSteps": ["trade_license_application"],
+      "requiredDocuments": [],
+      "estimatedDays": 2,
+      "responsibleParty": "nbr"
+    },
+    {
+      "id": "bangladesh_bank_submission",
+      "name": "Bangladesh Bank FDI Approval",
+      "order": 9,
+      "triggers": ["fx_approval"],
+      "nextSteps": ["fx_approval"],
+      "requiredDocuments": [
+        "investment_proposal",
+        "source_of_funds",
+        "rjsc_certificate"
+      ],
+      "estimatedDays": 10,
+      "responsibleParty": "bangladesh_bank"
+    },
+    {
+      "id": "fx_approval",
+      "name": "Foreign Exchange Approval",
+      "order": 10,
+      "triggers": ["bank_account_opening"],
+      "nextSteps": ["bank_account_opening"],
+      "requiredDocuments": [],
+      "estimatedDays": 3,
+      "responsibleParty": "bangladesh_bank"
+    },
+    {
+      "id": "environmental_clearance",
+      "name": "Environmental Clearance (if applicable)",
+      "order": 11,
+      "triggers": ["environmental_approval"],
+      "nextSteps": ["environmental_approval"],
+      "requiredDocuments": [
+        "environmental_impact_assessment",
+        "site_plan"
+      ],
+      "estimatedDays": 15,
+      "responsibleParty": "doe",
+      "conditional": {
+        "sectors": ["Manufacturing", "Chemical", "Textile", "Food Processing"]
+      }
+    },
+    {
+      "id": "fire_safety_clearance",
+      "name": "Fire Safety Clearance (if factory)",
+      "order": 12,
+      "triggers": ["fire_inspection"],
+      "nextSteps": ["fire_inspection"],
+      "requiredDocuments": [
+        "fire_layout_plan",
+        "factory_blueprint"
+      ],
+      "estimatedDays": 10,
+      "responsibleParty": "fire_service",
+      "conditional": {
+        "requiresFactory": true
+      }
+    },
+    {
+      "id": "zone_allocation",
+      "name": "Economic Zone Land Allocation (if BEZA/BEPZA)",
+      "order": 13,
+      "triggers": ["zone_approval"],
+      "nextSteps": ["zone_approval"],
+      "requiredDocuments": [
+        "land_requirement_plan",
+        "facility_layout"
+      ],
+      "estimatedDays": 20,
+      "responsibleParty": "beza_bepza",
+      "conditional": {
+        "zones": ["BEZA", "BEPZA", "BHTPA"]
+      }
+    },
+    {
+      "id": "sector_specific_licenses",
+      "name": "Sector-Specific Licenses",
+      "order": 14,
+      "triggers": ["license_approval"],
+      "nextSteps": ["license_approval"],
+      "requiredDocuments": [],
+      "estimatedDays": 15,
+      "responsibleParty": "sector_authority",
+      "conditional": {
+        "sectors": ["Pharmaceutical", "Food Processing", "Telecom", "Banking"]
+      },
+      "examples": {
+        "Pharmaceutical": "Drug Administration License",
+        "Food Processing": "BSTI Certificate",
+        "Telecom": "BTRC License",
+        "Banking": "Bangladesh Bank Banking License"
+      }
+    },
+    {
+      "id": "final_bida_approval",
+      "name": "Final BIDA Investment Approval",
+      "order": 15,
+      "triggers": ["certificate_issuance"],
+      "nextSteps": ["certificate_issuance"],
+      "requiredDocuments": [],
+      "estimatedDays": 5,
+      "responsibleParty": "bida_officer"
+    },
+    {
+      "id": "certificate_issuance",
+      "name": "Investment Certificate Issuance",
+      "order": 16,
+      "triggers": ["operational_setup"],
+      "nextSteps": ["operational_setup"],
+      "requiredDocuments": [],
+      "estimatedDays": 2,
+      "responsibleParty": "bida"
+    },
+    {
+      "id": "operational_setup",
+      "name": "Operational Setup & Monitoring",
+      "order": 17,
+      "triggers": [],
+      "nextSteps": [],
+      "requiredDocuments": [],
+      "estimatedDays": 0,
+      "responsibleParty": "investor",
+      "ongoing": true
+    }
+  ],
+  
+  "approvalChains": {
+    "manufacturing_general": [
+      "profile_creation",
+      "application_submission",
+      "bida_initial_review",
+      "payment_processing",
+      "rjsc_submission",
+      "rjsc_approval",
+      "tin_application",
+      "tin_approval",
+      "bangladesh_bank_submission",
+      "fx_approval",
+      "environmental_clearance",
+      "fire_safety_clearance",
+      "final_bida_approval",
+      "certificate_issuance",
+      "operational_setup"
+    ],
+    
+    "service_general": [
+      "profile_creation",
+      "application_submission",
+      "bida_initial_review",
+      "payment_processing",
+      "rjsc_submission",
+      "rjsc_approval",
+      "tin_application",
+      "tin_approval",
+      "bangladesh_bank_submission",
+      "fx_approval",
+      "final_bida_approval",
+      "certificate_issuance",
+      "operational_setup"
+    ],
+    
+    "pharmaceutical": [
+      "profile_creation",
+      "application_submission",
+      "bida_initial_review",
+      "payment_processing",
+      "rjsc_submission",
+      "rjsc_approval",
+      "tin_application",
+      "tin_approval",
+      "bangladesh_bank_submission",
+      "fx_approval",
+      "environmental_clearance",
+      "fire_safety_clearance",
+      "sector_specific_licenses",
+      "final_bida_approval",
+      "certificate_issuance",
+      "operational_setup"
+    ],
+    
+    "zone_based": [
+      "profile_creation",
+      "application_submission",
+      "bida_initial_review",
+      "payment_processing",
+      "zone_allocation",
+      "rjsc_submission",
+      "rjsc_approval",
+      "tin_application",
+      "tin_approval",
+      "bangladesh_bank_submission",
+      "fx_approval",
+      "environmental_clearance",
+      "fire_safety_clearance",
+      "final_bida_approval",
+      "certificate_issuance",
+      "operational_setup"
+    ]
+  },
+  
+  "criticalPaths": {
+    "fast_track_service": {
+      "steps": [
+        "profile_creation",
+        "application_submission",
+        "bida_initial_review",
+        "payment_processing",
+        "rjsc_submission",
+        "rjsc_approval",
+        "bangladesh_bank_submission",
+        "fx_approval",
+        "final_bida_approval",
+        "certificate_issuance"
+      ],
+      "estimatedTotalDays": 25,
+      "requirements": [
+        "Investment < $1M",
+        "Service sector",
+        "No factory required",
+        "Standard business activity"
+      ]
+    },
+    
+    "standard_manufacturing": {
+      "steps": [
+        "profile_creation",
+        "application_submission",
+        "bida_initial_review",
+        "payment_processing",
+        "rjsc_submission",
+        "rjsc_approval",
+        "tin_application",
+        "tin_approval",
+        "bangladesh_bank_submission",
+        "fx_approval",
+        "environmental_clearance",
+        "fire_safety_clearance",
+        "final_bida_approval",
+        "certificate_issuance"
+      ],
+      "estimatedTotalDays": 60,
+      "requirements": [
+        "Manufacturing sector",
+        "Factory setup required",
+        "Environmental clearance needed"
+      ]
+    },
+    
+    "complex_regulated": {
+      "steps": [
+        "profile_creation",
+        "application_submission",
+        "bida_initial_review",
+        "payment_processing",
+        "rjsc_submission",
+        "rjsc_approval",
+        "tin_application",
+        "tin_approval",
+        "bangladesh_bank_submission",
+        "fx_approval",
+        "environmental_clearance",
+        "fire_safety_clearance",
+        "zone_allocation",
+        "sector_specific_licenses",
+        "final_bida_approval",
+        "certificate_issuance"
+      ],
+      "estimatedTotalDays": 90,
+      "requirements": [
+        "Pharmaceutical, Food Processing, or Telecom",
+        "Economic zone allocation",
+        "Multiple regulatory approvals"
+      ]
+    }
+  }
+}

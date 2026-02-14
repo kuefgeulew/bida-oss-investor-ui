@@ -1,0 +1,71 @@
+{
+  "common": {
+    "dashboard": "डैशबोर्ड",
+    "services": "सेवाएं",
+    "agencies": "एजेंसियां",
+    "profile": "प्रोफ़ाइल",
+    "logout": "लॉग आउट",
+    "login": "लॉग इन",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "export": "निर्यात करें",
+    "import": "आयात करें",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता"
+  },
+  "investor": {
+    "title": "निवेशक डैशबोर्ड",
+    "welcome": "स्वागत है",
+    "myApplications": "मेरे आवेदन",
+    "services": "उपलब्ध सेवाएं",
+    "status": "आवेदन स्थिति",
+    "payments": "भुगतान",
+    "documents": "दस्तावेज़",
+    "support": "सहायता"
+  },
+  "officer": {
+    "title": "अधिकारी डैशबोर्ड",
+    "pendingApprovals": "लंबित अनुमोदन",
+    "myWorkload": "मेरा कार्यभार",
+    "statistics": "सांख्यिकी"
+  },
+  "admin": {
+    "title": "प्रशासक डैशबोर्ड",
+    "users": "उपयोगकर्ता",
+    "analytics": "विश्लेषण",
+    "settings": "सेटिंग्स",
+    "reports": "रिपोर्ट"
+  },
+  "services": {
+    "apply": "सेवा के लिए आवेदन करें",
+    "status": "सेवा स्थिति",
+    "sla": "सेवा स्तर समझौता",
+    "fee": "शुल्क",
+    "days": "दिन",
+    "approved": "स्वीकृत",
+    "pending": "लंबित",
+    "rejected": "अस्वीकृत"
+  },
+  "transparency": {
+    "slaTitle": "सेवा स्तर समझौता प्रदर्शन",
+    "sectorHubs": "क्षेत्र केंद्र",
+    "ratings": "सेवा रेटिंग",
+    "overview": "अवलोकन"
+  },
+  "quickActions": {
+    "applyService": "सेवा के लिए आवेदन करें",
+    "uploadDocs": "दस्तावेज़ अपलोड करें",
+    "makePayment": "भुगतान करें",
+    "trackStatus": "स्थिति ट्रैक करें",
+    "bookAppointment": "अपॉइंटमेंट बुक करें",
+    "contactOfficer": "अधिकारी से संपर्क करें",
+    "aiAssistant": "एआई सहायक",
+    "downloadReport": "रिपोर्ट डाउनलोड करें"
+  }
+}

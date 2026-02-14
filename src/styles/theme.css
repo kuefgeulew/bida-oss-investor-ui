@@ -1,0 +1,521 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+/*
+══════════════════════════════════════════════════════════════
+🎨 GLOBAL UI LAW — BACKGROUND IMMUTABLE
+══════════════════════════════════════════════════════════════
+• Background is ALWAYS light
+• No dark themes, ever
+• All surfaces inherit from root
+• All glass uses canonical tokens
+Violations = UI regression
+══════════════════════════════════════════════════════════════
+*/
+
+@theme {
+  /* ═══════════════════════════════════════════════════════════════
+     CANONICAL BACKGROUND TOKENS (SOURCE OF TRUTH)
+     DO NOT CREATE ALTERNATIVE BACKGROUND TOKENS ANYWHERE
+     ═══════════════════════════════════════════════════════════== */
+  
+  /* Core Backgrounds */
+  --bg-app: #f7f9fc;              /* Primary app background - near white */
+  --bg-surface: #ffffff;          /* Cards / panels - pure white */
+  --bg-glass: rgba(255, 255, 255, 0.72); /* Glass effects */
+  
+  /* Glass System */
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --glass-blur: blur(14px);
+  
+  /* SOOTHING COLOR SYSTEM - Government-grade calm intelligence */
+  
+  /* Base Colors */
+  --color-base-bg: #f5f7fb;
+  --color-card-white: rgba(255, 255, 255, 0.62);
+  
+  /* PRIMARY ACCENT SYSTEM - Premium tri-color authority */
+  --primary-blue: #3b82f6;
+  --accent-teal: #0e7490;
+  --accent-copper: #9a3412;
+  
+  /* Accent Colors - Used VERY sparingly */
+  --color-primary: #3b82f6;
+  --color-primary-soft: #eef4ff;
+  --color-border-tint: #e3ebf7;
+  
+  /* Text Hierarchy */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+}
+
+/* ========================================
+   NEUMORPHIC INSTRUMENT SURFACE SYSTEM
+   Product-grade surface contract
+   ======================================== */
+
+/* Core neumorphic surface - etched aluminum feel */
+.neu-surface {
+  background: #f5f7fb;
+  border: 1px solid #e3ebf7;
+  border-radius: 18px;
+  box-shadow:
+    6px 6px 14px rgba(15,23,42,0.06),
+    -6px -6px 14px rgba(255,255,255,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+/* Hover state for interactive surfaces */
+.neu-surface-hover:hover {
+  border-color: #dbeafe;
+  box-shadow:
+    8px 8px 16px rgba(15,23,42,0.08),
+    -8px -8px 16px rgba(255,255,255,0.95),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* Icon containers - machined button feel */
+.neu-icon-container {
+  background: linear-gradient(to bottom right, #ffffff, #eef3f9);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 -1px 0 rgba(15,23,42,0.05) inset;
+  border-radius: 16px;
+}
+
+/* Micro-elevation for stats/metrics */
+.neu-stat {
+  background: #f5f7fb;
+  border: 1px solid #e3ebf7;
+  border-radius: 16px;
+  box-shadow:
+    4px 4px 10px rgba(15,23,42,0.05),
+    -4px -4px 10px rgba(255,255,255,0.85),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Engraved nameplate (header badges) */
+.neu-nameplate {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  border: 1px solid #e3ebf7;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    inset 0 -1px 0 rgba(15,23,42,0.04);
+  border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ========================================
+   PREMIUM GLASS SYSTEM (Legacy support)
+   DEPRECATED - Use neu-surface instead
+   ======================================== */
+
+/* REMOVED: Deprecated glass classes have been completely removed from the codebase.
+   The system now uses only the neumorphic instrument surface system defined above.
+   All components should use InstrumentCard, InstrumentSection, InstrumentButton
+   from @/app/components/ui-primitives instead. */
+
+/* POSH TYPOGRAPHY */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  color: #0f172a;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   UNIFIED GLASSMORPHISM SYSTEM
+   Government-Grade, Light, Apple-Premium
+   ======================================== */
+
+/* GLASS TAB BUTTON SYSTEM - Light & Cohesive */
+.glass-tab-button {
+  position: relative;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 8px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glass-tab-button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 4px 12px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Row 1 Active State - Sky Blue (Light) */
+.glass-tab-button-active-row1 {
+  background: linear-gradient(135deg, rgba(191, 219, 254, 0.6), rgba(147, 197, 253, 0.5));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(96, 165, 250, 0.4);
+  box-shadow: 
+    0 8px 20px rgba(59, 130, 246, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(59, 130, 246, 0.08);
+}
+
+/* Row 2 Active State - Lavender (Light) */
+.glass-tab-button-active-row2 {
+  background: linear-gradient(135deg, rgba(221, 214, 254, 0.55), rgba(196, 181, 253, 0.45));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(167, 139, 250, 0.35);
+  box-shadow: 
+    0 8px 20px rgba(139, 92, 246, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(139, 92, 246, 0.06);
+}
+
+/* GLASS TAB CONTAINER - Light, Airy Foundation */
+.glass-tab-container {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 16px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* GLASS SECTION - Nested Content Containers */
+.glass-section {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 16px;
+  box-shadow: 
+    0 2px 10px rgba(15, 23, 42, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* GLASS SECTION - Subtle Variant */
+.glass-section-subtle {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 6px rgba(15, 23, 42, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* GLASS CARD - Premium Surface */
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 18px;
+  box-shadow: 
+    0 3px 12px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 6px 16px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* SHADOW SYSTEM - Soft & Diffuse */
+.glass-shadow-sm {
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.02);
+}
+
+.glass-shadow-md {
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.glass-shadow-lg {
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+/* ACCENT GLOW - Subtle Enhancement */
+.glass-glow-sky {
+  box-shadow: 
+    0 0 20px rgba(96, 165, 250, 0.1),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.glass-glow-lavender {
+  box-shadow: 
+    0 0 20px rgba(167, 139, 250, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.glass-glow-mint {
+  box-shadow: 
+    0 0 20px rgba(110, 231, 183, 0.1),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+/* ACCENT GLOW - LIGHT VARIANTS (For DISCOVER Tab) - Almost White */
+.glass-glow-sky-light {
+  box-shadow: 
+    0 0 20px rgba(186, 230, 253, 0.04),
+    0 2px 8px rgba(15, 23, 42, 0.01);
+  border: 1px solid rgba(186, 230, 253, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.glass-glow-lavender-light {
+  box-shadow: 
+    0 0 20px rgba(221, 214, 254, 0.04),
+    0 2px 8px rgba(15, 23, 42, 0.01);
+  border: 1px solid rgba(221, 214, 254, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.glass-glow-mint-light {
+  box-shadow: 
+    0 0 20px rgba(209, 250, 229, 0.04),
+    0 2px 8px rgba(15, 23, 42, 0.01);
+  border: 1px solid rgba(209, 250, 229, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.glass-glow-teal-light {
+  box-shadow: 
+    0 0 20px rgba(204, 251, 241, 0.04),
+    0 2px 8px rgba(15, 23, 42, 0.01);
+  border: 1px solid rgba(204, 251, 241, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* DEPTH HIERARCHY - Top to Bottom Zones */
+.glass-zone-top {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-zone-middle {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-zone-bottom {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* GLASS BUTTON - Interactive Elements */
+.glass-button {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  color: #475569;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 8px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #0f172a;
+  box-shadow: 
+    0 4px 12px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+.glass-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 6px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* GLASS NAVBAR - Top Navigation */
+.glass-navbar {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 2px 12px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+/* STATUS BADGES - Calm, not loud */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.status-completed {
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.status-pending {
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.status-delayed {
+  background: rgba(245, 158, 11, 0.08);
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.status-rejected {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* FOCUS STATES - Subtle, not harsh */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+}
+
+/* SCROLLBAR - Minimal */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e3ebf7;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hide scrollbar utility class for horizontal shelves */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* INPUT FIELDS - Consistent across all screens */
+.input-field {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e3ebf7;
+  border-radius: 12px;
+  color: #0f172a;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: #94a3b8;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.input-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* SELECT FIELDS */
+.select-field {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e3ebf7;
+  border-radius: 12px;
+  color: #0f172a;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.select-field:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* TEXTAREA FIELDS */
+.textarea-field {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e3ebf7;
+  border-radius: 12px;
+  color: #0f172a;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.textarea-field::placeholder {
+  color: #94a3b8;
+}
+
+.textarea-field:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+}

@@ -1,0 +1,473 @@
+// BIDA OSS Database Schema
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER MANAGEMENT
+// ============================================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  phone     String?  @unique
+  password  String
+  name      String
+  role      UserRole @default(INVESTOR)
+  avatar    String?
+  isActive  Boolean  @default(true)
+  emailVerified Boolean @default(false)
+  phoneVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  profile       InvestorProfile?
+  applications  Application[]
+  notifications Notification[]
+  auditLogs     AuditLog[]
+  payments      Payment[]
+  appointments  Appointment[]
+  assignedApplications Application[] @relation("AssignedOfficer")
+
+  @@map("users")
+}
+
+enum UserRole {
+  INVESTOR
+  OFFICER
+  ADMIN
+  SUPER_ADMIN
+}
+
+// ============================================
+// INVESTOR PROFILE
+// ============================================
+
+model InvestorProfile {
+  id                String         @id @default(uuid())
+  userId            String         @unique
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Business Information
+  businessName      String
+  businessType      BusinessType
+  sector            String
+  investmentAmount  Float
+  numberOfEmployees Int?
+  
+  // Location
+  division          String
+  district          String
+  upazila           String
+  address           String?
+  
+  // Company Details
+  registrationNumber String?
+  tinNumber         String?
+  vatNumber         String?
+  binNumber         String?
+  
+  // Contact
+  contactPerson     String?
+  contactEmail      String?
+  contactPhone      String?
+  website           String?
+  
+  // Status
+  status            ProfileStatus @default(DRAFT)
+  completionPercent Int           @default(0)
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  // Relations
+  documents         Document[]
+  applications      Application[]
+
+  @@map("investor_profiles")
+}
+
+enum BusinessType {
+  LOCAL
+  FOREIGN
+  JOINT_VENTURE
+}
+
+enum ProfileStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+// ============================================
+// APPLICATIONS
+// ============================================
+
+model Application {
+  id              String            @id @default(uuid())
+  applicationNo   String            @unique
+  investorId      String
+  investor        User              @relation(fields: [investorId], references: [id])
+  profileId       String
+  profile         InvestorProfile   @relation(fields: [profileId], references: [id])
+  
+  // Application Details
+  type            String
+  agency          Agency
+  title           String
+  description     String?
+  
+  // Status & Timeline
+  status          ApplicationStatus @default(PENDING)
+  currentStep     Int               @default(1)
+  totalSteps      Int               @default(5)
+  submittedAt     DateTime          @default(now())
+  slaDeadline     DateTime
+  completedAt     DateTime?
+  
+  // Assignment
+  assignedOfficerId String?
+  assignedOfficer   User?           @relation("AssignedOfficer", fields: [assignedOfficerId], references: [id])
+  
+  // Priority & Flags
+  priority        Priority          @default(NORMAL)
+  isUrgent        Boolean           @default(false)
+  isFastTrack     Boolean           @default(false)
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  // Relations
+  approvalSteps   ApprovalStep[]
+  documents       Document[]
+  payments        Payment[]
+  notifications   Notification[]
+
+  @@map("applications")
+}
+
+enum Agency {
+  BIDA
+  BEZA
+  BEPZA
+  BHTPA
+  BSCIC
+  PPPA
+}
+
+enum ApplicationStatus {
+  PENDING
+  IN_PROGRESS
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  DELAYED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+// ============================================
+// APPROVAL WORKFLOW
+// ============================================
+
+model ApprovalStep {
+  id              String        @id @default(uuid())
+  applicationId   String
+  application     Application   @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  // Step Details
+  stepNumber      Int
+  name            String
+  agency          String
+  department      String?
+  
+  // Status & Timeline
+  status          StepStatus    @default(PENDING)
+  startDate       DateTime?
+  completedDate   DateTime?
+  slaDeadline     DateTime
+  
+  // Assignment
+  assignedTo      String?
+  assignedOfficer String?
+  
+  // Additional Info
+  notes           String?
+  rejectionReason String?
+  requirements    String?
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([applicationId, stepNumber])
+  @@map("approval_steps")
+}
+
+enum StepStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  REJECTED
+  SKIPPED
+}
+
+// ============================================
+// DOCUMENTS
+// ============================================
+
+model Document {
+  id            String          @id @default(uuid())
+  name          String
+  originalName  String
+  type          String
+  size          Int
+  url           String
+  category      DocumentCategory
+  
+  // OCR Data
+  ocrProcessed  Boolean         @default(false)
+  ocrData       Json?
+  
+  // Relations
+  investorId    String?
+  investor      InvestorProfile? @relation(fields: [investorId], references: [id])
+  applicationId String?
+  application   Application?    @relation(fields: [applicationId], references: [id])
+  
+  uploadedAt    DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@map("documents")
+}
+
+enum DocumentCategory {
+  PASSPORT
+  NID
+  LICENSE
+  CERTIFICATE
+  FINANCIAL
+  TAX
+  INCORPORATION
+  OTHER
+}
+
+// ============================================
+// PAYMENTS
+// ============================================
+
+model Payment {
+  id              String        @id @default(uuid())
+  transactionId   String        @unique
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  applicationId   String?
+  application     Application?  @relation(fields: [applicationId], references: [id])
+  
+  // Payment Details
+  amount          Float
+  currency        String        @default("BDT")
+  method          PaymentMethod
+  gateway         String?
+  
+  // Status
+  status          PaymentStatus @default(PENDING)
+  paidAt          DateTime?
+  
+  // Gateway Response
+  gatewayResponse Json?
+  receiptUrl      String?
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("payments")
+}
+
+enum PaymentMethod {
+  BKASH
+  NAGAD
+  CARD
+  BANK_TRANSFER
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// ============================================
+// NOTIFICATIONS
+// ============================================
+
+model Notification {
+  id          String           @id @default(uuid())
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  type        NotificationType
+  title       String
+  message     String
+  link        String?
+  
+  read        Boolean          @default(false)
+  readAt      DateTime?
+  
+  applicationId String?
+  application   Application?   @relation(fields: [applicationId], references: [id])
+  
+  createdAt   DateTime         @default(now())
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  APPLICATION_STATUS
+  PAYMENT
+  DOCUMENT
+  APPOINTMENT
+  SLA_ALERT
+}
+
+// ============================================
+// APPOINTMENTS
+// ============================================
+
+model Appointment {
+  id          String            @id @default(uuid())
+  userId      String
+  user        User              @relation(fields: [userId], references: [id])
+  
+  // Appointment Details
+  title       String
+  description String?
+  agency      String
+  department  String
+  officerName String
+  officerEmail String?
+  
+  // Schedule
+  scheduledAt DateTime
+  duration    Int               @default(30) // minutes
+  meetingType MeetingType
+  meetingUrl  String?
+  location    String?
+  
+  // Status
+  status      AppointmentStatus @default(SCHEDULED)
+  
+  // Notifications
+  reminderSent Boolean          @default(false)
+  
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@map("appointments")
+}
+
+enum MeetingType {
+  VIRTUAL
+  IN_PERSON
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+// ============================================
+// AUDIT TRAIL
+// ============================================
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  // Action Details
+  action      String
+  entity      String
+  entityId    String?
+  
+  // Changes
+  changes     Json?
+  ipAddress   String?
+  userAgent   String?
+  
+  timestamp   DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+// ============================================
+// SERVICES CATALOG
+// ============================================
+
+model Service {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  agency      String
+  category    String
+  
+  // Requirements
+  requirements String?
+  documents    String[] // Array of required document types
+  
+  // Fees & Timeline
+  fee         Float?
+  currency    String   @default("BDT")
+  processingTime String? // e.g., "7 working days"
+  sla         Int?     // SLA in days
+  
+  // Status
+  isActive    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+// ============================================
+// SYSTEM CONFIGURATION
+// ============================================
+
+model SystemConfig {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  description String?
+  category    String
+  
+  updatedBy   String?
+  updatedAt   DateTime @updatedAt
+
+  @@map("system_config")
+}

@@ -1,0 +1,301 @@
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Package manager lock files (choose one)
+# Uncomment the lock file you want to keep:
+# package-lock.json    # npm
+# yarn.lock           # yarn
+# pnpm-lock.yaml      # pnpm
+
+# ==================== BUILD OUTPUTS ====================
+# Vite build output
+dist/
+dist-ssr/
+*.local
+
+# Vite cache
+.vite/
+vite.config.ts.timestamp-*
+
+# TypeScript build info
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# ESBuild
+.esbuild/
+
+# ==================== ENVIRONMENT & SECRETS ====================
+# Environment variables
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+
+# API Keys & Secrets (even though project doesn't use them currently)
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.secrets/
+
+# ==================== EDITOR & IDE ====================
+# VSCode
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+# JetBrains IDEs (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# ==================== OPERATING SYSTEMS ====================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+# ==================== TESTING ====================
+# Test coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Test results
+test-results/
+junit.xml
+*.spec.js.snap
+__snapshots__/
+
+# Playwright
+playwright-report/
+playwright/.cache/
+
+# ==================== LOGS ====================
+# Application logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Server logs (if backend added later)
+server/logs/
+*.log.*
+
+# ==================== TEMPORARY FILES ====================
+# Temporary folders
+tmp/
+temp/
+.tmp/
+.cache/
+
+# Build artifacts
+build/
+.next/
+.nuxt/
+.docusaurus/
+
+# ==================== DATABASE & BACKEND ====================
+# Database files (if local DB added)
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Prisma (backend folder has Prisma schema)
+server/prisma/migrations/dev.db
+server/prisma/dev.db
+server/.env
+
+# MongoDB
+*.mongodb
+
+# PostgreSQL
+*.dump
+*.sql
+
+# ==================== MEDIA & ASSETS ====================
+# Large media files (uncomment if you want to exclude them)
+# *.mp4
+# *.mov
+# *.avi
+# *.mkv
+# *.psd
+# *.ai
+
+# Generated images (if any)
+# public/generated/
+
+# Image optimization cache
+.image-cache/
+.sharp-cache/
+
+# ==================== DOCUMENTATION ====================
+# Generated documentation (keep source .md files)
+# docs/build/
+# .docusaurus/
+
+# API documentation cache
+.redoc-cache/
+.swagger-cache/
+
+# ==================== DEPLOYMENT ====================
+# Vercel
+.vercel/
+.vercel
+
+# Netlify
+.netlify/
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# AWS
+.aws/
+.elasticbeanstalk/
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+
+# Kubernetes
+*.kubeconfig
+
+# ==================== ANALYTICS & MONITORING ====================
+# Sentry
+.sentryclirc
+
+# Analytics data
+analytics/
+.analytics/
+
+# ==================== MISCELLANEOUS ====================
+# Service worker cache
+sw.js
+workbox-*.js
+
+# Static site generators
+.cache/
+public/
+
+# Storybook
+storybook-static/
+.storybook/build/
+
+# Nx
+.nx/cache
+
+# Turborepo
+.turbo/
+
+# Rush
+common/temp/
+
+# ==================== PROJECT-SPECIFIC ====================
+# Mock data exports (if you generate exports)
+# /public/exports/
+
+# Demo recordings (if you record demos)
+# /demos/*.mp4
+
+# Seed data backups (if backend added)
+# /server/seeds/backup/
+
+# Report PDFs (if generated locally)
+# /public/reports/*.pdf
+
+# ==================== KEEP THESE FILES ====================
+# These are important and should be committed:
+# package.json          ✅ Required
+# tsconfig.json         ✅ Required
+# vite.config.ts        ✅ Required
+# /src/**               ✅ All source code
+# /public/geo/          ✅ Bangladesh map data
+# README.md             ✅ Documentation
+# *.md                  ✅ All markdown docs
+
+# ==================== OPTIONAL: LARGE MARKDOWN DOCS ====================
+# If you want to exclude the generated audit docs from repo:
+# /ALL_TABS_AND_FEATURES.md
+# /PROJECT_DEMO_FLOW.md
+# /PROJECT_SUMMARY.md
+# /LOCAL_SETUP_GUIDE.md
+# /MEDIA_ASSET_GUIDE.md
+# /FINAL_AUDIT_VERDICT.md
+
+# ==================== DEBUG & PROFILING ====================
+# Chrome DevTools performance profiles
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+
+# React DevTools
+.react-devtools/
+
+# Lighthouse reports
+lighthouse-report-*.html
+
+# Bundle analyzer
+stats.html
+bundle-stats.json
+
+# ==================== END OF .gitignore ====================

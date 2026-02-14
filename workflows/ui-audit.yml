@@ -1,0 +1,47 @@
+name: UI Rendering Protocol Audit
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  ui-audit:
+    name: Enforce UI Rendering Protocol
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Make audit script executable
+        run: chmod +x scripts/ui-audit.sh
+      
+      - name: Run UI audit
+        run: npm run ui-audit
+        
+      - name: Audit failed
+        if: failure()
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════"
+          echo "❌ UI RENDERING PROTOCOL VIOLATIONS DETECTED"
+          echo "═══════════════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "This PR introduces UI violations that break the rendering protocol."
+          echo ""
+          echo "NEXT STEPS:"
+          echo "1. Review the audit output above"
+          echo "2. Replace manual classes with Instrument* components"
+          echo "3. Import from ui-primitives.ts, not DesignSystem.tsx"
+          echo "4. Run 'npm run ui-audit' locally to verify fixes"
+          echo ""
+          echo "See: /src/app/components/UI_ENFORCEMENT_RULES.ts"
+          echo "See: /src/app/components/UI_PRIMITIVES_CHEATSHEET.ts"
+          echo ""
+          exit 1

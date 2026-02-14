@@ -1,0 +1,61 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "services": "Services",
+    "agencies": "Agencies",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "investor": {
+    "title": "Investor Dashboard",
+    "welcome": "Welcome",
+    "myApplications": "My Applications",
+    "services": "Available Services",
+    "status": "Application Status",
+    "payments": "Payments",
+    "documents": "Documents",
+    "support": "Support"
+  },
+  "officer": {
+    "title": "Officer Dashboard",
+    "pendingApprovals": "Pending Approvals",
+    "myWorkload": "My Workload",
+    "statistics": "Statistics"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "reports": "Reports"
+  },
+  "services": {
+    "apply": "Apply for Service",
+    "status": "Service Status",
+    "sla": "SLA",
+    "fee": "Fee",
+    "days": "days",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
+  "transparency": {
+    "slaTitle": "Service Level Agreement Performance",
+    "sectorHubs": "Sector Hubs",
+    "ratings": "Service Ratings",
+    "overview": "Overview"
+  }
+}

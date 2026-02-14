@@ -1,0 +1,213 @@
+{
+  "systemName": "BIDA One-Stop Service (OSS) Platform",
+  "description": "Bangladesh Investment Development Authority's unified platform for investment approvals",
+  
+  "agencies": [
+    {
+      "id": "BIDA",
+      "name": "Bangladesh Investment Development Authority",
+      "role": "Primary investment promotion agency",
+      "services": ["Investment registration", "Facilitator for all approvals", "OSS coordination"]
+    },
+    {
+      "id": "BEZA",
+      "name": "Bangladesh Economic Zones Authority",
+      "role": "Manages special economic zones",
+      "services": ["SEZ plot allocation", "SEZ incentives", "Zone infrastructure"]
+    },
+    {
+      "id": "BEPZA",
+      "name": "Bangladesh Export Processing Zones Authority",
+      "role": "Manages export processing zones",
+      "services": ["EPZ registration", "Export incentives", "Customs facilitation"]
+    },
+    {
+      "id": "RJSC",
+      "name": "Registrar of Joint Stock Companies",
+      "role": "Company registration authority",
+      "services": ["Company registration", "Business name approval", "Certificate of incorporation"],
+      "sla": "3-5 days",
+      "documents": ["Memorandum of Association", "Articles of Association", "Director details", "Shareholder information"]
+    },
+    {
+      "id": "DOE",
+      "name": "Department of Environment",
+      "role": "Environmental clearance authority",
+      "services": ["Environmental clearance certificate", "EIA approval", "Pollution control"],
+      "sla": "15-30 days",
+      "documents": ["Project proposal", "Environmental impact assessment", "Site plan"]
+    },
+    {
+      "id": "NBR",
+      "name": "National Board of Revenue",
+      "role": "Tax authority",
+      "services": ["TIN registration", "VAT registration", "BIN registration", "Tax clearance"],
+      "sla": "1-3 days"
+    }
+  ],
+
+  "businessTypes": [
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing Plant",
+      "description": "Industrial production facility",
+      "approvalSteps": [
+        {"step": 1, "title": "Company Registration", "agency": "RJSC", "sla": "3 days"},
+        {"step": 2, "title": "Trade License", "agency": "City Corporation", "sla": "5 days"},
+        {"step": 3, "title": "Environmental Clearance", "agency": "DOE", "sla": "15 days"},
+        {"step": 4, "title": "Fire Safety Certificate", "agency": "Fire Service", "sla": "7 days"},
+        {"step": 5, "title": "Factory License", "agency": "DIFE", "sla": "10 days"},
+        {"step": 6, "title": "Utility Connections", "agency": "DESCO/DESA", "sla": "7 days"},
+        {"step": 7, "title": "Bank Account Setup", "agency": "Partner Banks", "sla": "2 days"}
+      ],
+      "totalSLA": "49 days",
+      "requiredCapital": "Minimum $100,000"
+    },
+    {
+      "id": "trading",
+      "name": "Trading Company",
+      "description": "Import/export business",
+      "approvalSteps": [
+        {"step": 1, "title": "Company Registration", "agency": "RJSC", "sla": "3 days"},
+        {"step": 2, "title": "Trade License", "agency": "City Corporation", "sla": "5 days"},
+        {"step": 3, "title": "Import Registration Certificate", "agency": "CCI&E", "sla": "7 days"},
+        {"step": 4, "title": "Bank Account Setup", "agency": "Partner Banks", "sla": "2 days"},
+        {"step": 5, "title": "TIN Certificate", "agency": "NBR", "sla": "1 day"}
+      ],
+      "totalSLA": "18 days",
+      "requiredCapital": "Minimum $50,000"
+    },
+    {
+      "id": "pharma",
+      "name": "Pharmaceutical Company",
+      "description": "Medicine manufacturing",
+      "approvalSteps": [
+        {"step": 1, "title": "Company Registration", "agency": "RJSC", "sla": "3 days"},
+        {"step": 2, "title": "Drug License", "agency": "DGDA", "sla": "20 days"},
+        {"step": 3, "title": "Environmental Clearance", "agency": "DOE", "sla": "15 days"},
+        {"step": 4, "title": "Factory License", "agency": "DIFE", "sla": "10 days"},
+        {"step": 5, "title": "GMP Certification", "agency": "DGDA", "sla": "30 days"},
+        {"step": 6, "title": "Utility Connections", "agency": "DESCO/DESA", "sla": "7 days"},
+        {"step": 7, "title": "Bank Account Setup", "agency": "Partner Banks", "sla": "2 days"}
+      ],
+      "totalSLA": "87 days",
+      "requiredCapital": "Minimum $500,000"
+    },
+    {
+      "id": "real-estate",
+      "name": "Real Estate Development",
+      "description": "Property development",
+      "approvalSteps": [
+        {"step": 1, "title": "Company Registration", "agency": "RJSC", "sla": "3 days"},
+        {"step": 2, "title": "RAJUK Approval", "agency": "RAJUK", "sla": "45 days"},
+        {"step": 3, "title": "Land Registration", "agency": "Land Office", "sla": "10 days"},
+        {"step": 4, "title": "Environmental Clearance", "agency": "DOE", "sla": "15 days"},
+        {"step": 5, "title": "Utility Connections", "agency": "WASA/DESCO", "sla": "10 days"},
+        {"step": 6, "title": "Bank Account Setup", "agency": "Partner Banks", "sla": "2 days"}
+      ],
+      "totalSLA": "85 days",
+      "requiredCapital": "Minimum $1,000,000"
+    }
+  ],
+
+  "specialEconomicZones": [
+    {
+      "id": "sez-1",
+      "name": "Bangabandhu Sheikh Mujib Shilpa Nagar (BSMSN)",
+      "location": "Mirsharai, Chittagong",
+      "area": "30,000 acres",
+      "sectors": ["Heavy industry", "Steel", "Chemicals", "Automotive"],
+      "incentives": ["10-year tax holiday", "Duty-free import", "100% FDI allowed"],
+      "infrastructure": "Deep sea port access, Power plant, Gas connection"
+    },
+    {
+      "id": "sez-2",
+      "name": "Dhaka Economic Zone",
+      "location": "Dhaka",
+      "area": "500 acres",
+      "sectors": ["Electronics", "Light manufacturing", "IT/ITES", "Logistics"],
+      "incentives": ["7-year tax holiday", "Duty-free import", "Fast-track approvals"]
+    },
+    {
+      "id": "sez-3",
+      "name": "Mongla Economic Zone",
+      "location": "Mongla, Bagerhat",
+      "area": "1,000 acres",
+      "sectors": ["Agro-processing", "Fish processing", "Ship building", "Logistics"],
+      "incentives": ["10-year tax holiday", "Port connectivity", "Export incentives"]
+    }
+  ],
+
+  "investmentIncentives": {
+    "taxHolidays": {
+      "manufacturing": "5-10 years depending on sector and location",
+      "highTech": "10 years for IT, electronics, pharmaceuticals",
+      "exportOriented": "10 years for 100% export-oriented units"
+    },
+    "dutyExemptions": {
+      "capitalMachinery": "Import duty exemption on machinery",
+      "rawMaterials": "Duty exemption for export-oriented production",
+      "utilities": "Reduced rates for industrial consumers"
+    },
+    "fdiPolicy": {
+      "allowed": "100% FDI allowed in most sectors",
+      "restricted": "Limited in defense, nuclear energy, forest, security printing",
+      "repatriation": "Full repatriation of capital and profits allowed",
+      "protection": "Protection against nationalization"
+    }
+  },
+
+  "commonQuestions": [
+    {
+      "question": "How long does company registration take?",
+      "answer": "Company registration through RJSC typically takes 3-5 working days with complete documentation."
+    },
+    {
+      "question": "What is the minimum investment required?",
+      "answer": "Minimum investment varies by sector: Trading ($50,000), Manufacturing ($100,000), Pharmaceuticals ($500,000), Real Estate ($1,000,000)."
+    },
+    {
+      "question": "Are there tax benefits?",
+      "answer": "Yes, tax holidays range from 5-10 years depending on sector and location. High-tech and export-oriented industries get up to 10 years."
+    },
+    {
+      "question": "Can I get 100% foreign ownership?",
+      "answer": "Yes, 100% FDI is allowed in most sectors except defense, nuclear energy, forest, and security printing."
+    },
+    {
+      "question": "Which SEZ is best for my industry?",
+      "answer": "BSMSN (Chittagong) for heavy industry, Dhaka SEZ for electronics/IT, Mongla SEZ for agro-processing and logistics."
+    },
+    {
+      "question": "What documents do I need?",
+      "answer": "Basic documents: Company incorporation papers, business plan, financial statements, passport copies, NOC from home country (for foreign investors)."
+    }
+  ],
+
+  "applicationStatuses": [
+    {"status": "PENDING", "description": "Application received, awaiting review"},
+    {"status": "IN_PROGRESS", "description": "Under processing by relevant agency"},
+    {"status": "UNDER_REVIEW", "description": "Documents being reviewed"},
+    {"status": "APPROVED", "description": "Application approved, certificate issued"},
+    {"status": "REJECTED", "description": "Application rejected, resubmission needed"},
+    {"status": "DELAYED", "description": "Processing delayed, follow-up required"}
+  ],
+
+  "rules": [
+    "All foreign investors must register with BIDA first",
+    "Environmental clearance mandatory for manufacturing",
+    "Minimum capital requirements vary by sector",
+    "Tax holidays apply from start of commercial production",
+    "Repatriation of profits allowed after payment of taxes",
+    "Work permits required for foreign employees",
+    "Maximum 5% of workforce can be foreign nationals"
+  ],
+
+  "supportServices": {
+    "banking": ["Bank account opening assistance", "Foreign currency accounts", "LC facilitation"],
+    "legal": ["Legal documentation support", "Contract vetting", "IP registration"],
+    "utility": ["Power connection", "Gas connection", "Water supply", "Internet connectivity"],
+    "recruitment": ["Work permit processing", "Local hiring support", "Training programs"],
+    "aftercare": ["Regular check-ins", "Problem resolution", "Expansion support", "Policy updates"]
+  }
+}

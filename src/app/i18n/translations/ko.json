@@ -1,0 +1,71 @@
+{
+  "common": {
+    "dashboard": "대시보드",
+    "services": "서비스",
+    "agencies": "기관",
+    "profile": "프로필",
+    "logout": "로그아웃",
+    "login": "로그인",
+    "submit": "제출",
+    "cancel": "취소",
+    "save": "저장",
+    "edit": "편집",
+    "delete": "삭제",
+    "search": "검색",
+    "filter": "필터",
+    "export": "내보내기",
+    "import": "가져오기",
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공"
+  },
+  "investor": {
+    "title": "투자자 대시보드",
+    "welcome": "환영합니다",
+    "myApplications": "내 신청",
+    "services": "사용 가능한 서비스",
+    "status": "신청 상태",
+    "payments": "결제",
+    "documents": "문서",
+    "support": "지원"
+  },
+  "officer": {
+    "title": "담당자 대시보드",
+    "pendingApprovals": "보류 중인 승인",
+    "myWorkload": "내 업무",
+    "statistics": "통계"
+  },
+  "admin": {
+    "title": "관리자 대시보드",
+    "users": "사용자",
+    "analytics": "분석",
+    "settings": "설정",
+    "reports": "보고서"
+  },
+  "services": {
+    "apply": "서비스 신청",
+    "status": "서비스 상태",
+    "sla": "서비스 수준 계약",
+    "fee": "수수료",
+    "days": "일",
+    "approved": "승인됨",
+    "pending": "보류 중",
+    "rejected": "거부됨"
+  },
+  "transparency": {
+    "slaTitle": "서비스 수준 계약 성과",
+    "sectorHubs": "섹터 허브",
+    "ratings": "서비스 평가",
+    "overview": "개요"
+  },
+  "quickActions": {
+    "applyService": "서비스 신청",
+    "uploadDocs": "문서 업로드",
+    "makePayment": "결제하기",
+    "trackStatus": "상태 추적",
+    "bookAppointment": "예약하기",
+    "contactOfficer": "담당자에게 연락",
+    "aiAssistant": "AI 어시스턴트",
+    "downloadReport": "보고서 다운로드"
+  }
+}
